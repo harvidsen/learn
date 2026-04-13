@@ -34,16 +34,21 @@ def max_production(m, i, t):
 model.MaxProduction = pyo.Constraint(model.I, model.T, rule=max_production)
 
 
-opt = SolverFactory("glpk")
+def run():
+    opt = SolverFactory("glpk")
 
-instance = create_random_instance(model, num_timesteps=24, num_plants=3, seed=42)
-print("Solving small")
-result = opt.solve(instance)
-print("Finished", result)
+    instance = create_random_instance(model, num_timesteps=24, num_plants=3, seed=42)
+    print("Solving small")
+    result = opt.solve(instance)
+    print("Finished", result)
 
-instance = create_random_instance(
-    model, num_timesteps=24 * 7 * 52, num_plants=50, seed=42
-)
-print("Solving large")
-result = opt.solve(instance)
-print("Finished", result)
+    instance = create_random_instance(
+        model, num_timesteps=24 * 7 * 25, num_plants=50, seed=42
+    )
+    print("Solving large")
+    result = opt.solve(instance)
+    print("Finished", result)
+
+
+if __name__ == "__main__":
+    run()

@@ -1,5 +1,7 @@
+import matplotlib.pyplot as plt
 import pyomo.environ as pyo
 from instance_generator import create_random_instance
+from plotting import plot_price_and_production
 from pyomo.opt import SolverFactory
 
 model = pyo.AbstractModel()
@@ -41,6 +43,8 @@ def run():
     print("Solving small")
     result = opt.solve(instance)
     print("Finished", result)
+    plot_price_and_production(instance)
+    plt.show()
 
     instance = create_random_instance(
         model, num_timesteps=24 * 7 * 25, num_plants=50, seed=42

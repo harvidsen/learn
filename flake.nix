@@ -20,6 +20,7 @@
         buildInputs = with pkgs.python3Packages; [
           pyomo
           numpy
+          matplotlib
           pkgs.glpk
         ];
       };

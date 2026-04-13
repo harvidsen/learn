@@ -10,13 +10,17 @@
 
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+      };
     in
     {
 
       devShells.x86_64-linux.pyomo = pkgs.mkShell {
-        buildInputs = [
-          pkgs.python3Packages.pyomo
+        buildInputs = with pkgs.python3Packages; [
+          pyomo
+          numpy
+          pkgs.glpk
         ];
       };
 
